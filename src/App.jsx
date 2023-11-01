@@ -1,19 +1,11 @@
-import { useState } from 'react'
-import './styles/normalize.scss';
+import LoginPage from './pages/LoginPage';
+// import RegisterPage from './pages/RegisterPage';
+import './styles/index.scss';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <h1>Frontend seguridad</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
-  )
+  return <div className='wrapper'>
+    <LoginPage />
+    </div>
 }
 
 export default App
