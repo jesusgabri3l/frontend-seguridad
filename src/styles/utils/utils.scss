@@ -45,6 +45,9 @@
     justify-content: space-around;
     align-items: center;
     gap: 15px;
+    div {
+        width: 100%;
+    }
 }
 .text-muted {
     color: #808080;
@@ -54,6 +57,11 @@
         text-decoration: underline;
         font-weight: 700;
     }
+}
+.error {
+    color: #c0392b;
+    font-weight: 700;
+    font-size: 14px;
 }
 @for $i from 1 through 10 {
     .mt-#{$i} {
