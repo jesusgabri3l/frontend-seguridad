@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from 'react';
 
 import ProtectedRoute from './components/ProtectedRoute';
+import UnProtectedRoute from './components/UnProtectedRoute';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
@@ -34,8 +35,8 @@ function App() {
     : 
     <BrowserRouter>
       <Routes>
-        <Route path='login' element={<LoginPage />} />
-        <Route path='register' element={<RegisterPage />} />
+        <Route path='login' element={<UnProtectedRoute><LoginPage /></UnProtectedRoute>} />
+        <Route path='register' element={<UnProtectedRoute><RegisterPage /></UnProtectedRoute>} />
         <Route path='/' exact element={
           <ProtectedRoute> 
             <HomePage /> 

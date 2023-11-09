@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import sha1 from 'sha1';
 import { useState } from "react";
 import Spinner from '../components/Spinner';
-import api from "../services/api";
+import api from "../services/auth";
 import { jwtDecode } from "jwt-decode";
 import { userStore } from "../store/user";
 import { setCookie } from '../utils/cookies.js'
@@ -26,6 +26,7 @@ function LoginPage () {
         e.preventDefault();
         if (formData.password.trim() === '' || formData.password.trim() === '') {
             setFormData({...formData, error: 'Por favor completa los campos'});
+            return;
         }
         try {
             const passwordEncrypted = sha1(formData.password.trim());
@@ -58,6 +59,7 @@ function LoginPage () {
                         placeholder="Usuario" 
                         name="username" 
                         required
+                        value={formData.username}
                         onChange={(e) => handleChange(e)} />
                     <input 
                         className="input mt-1" 
@@ -65,6 +67,7 @@ function LoginPage () {
                         placeholder="Contraseña" 
                         name="password"
                         required
+                        value={formData.password}
                         onChange={(e) => handleChange(e)} />   
                     <button className="button button--primary mt-2" type="submit">Iniciar sesión</button>
                     {

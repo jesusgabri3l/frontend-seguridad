@@ -14,5 +14,11 @@
     &--primary {
         background-color: $PRIMARY-COLOR;
         color: $TEXT-COLOR;
+        &--outline {
+            background-color: transparent;
+            border: 2px solid $PRIMARY-COLOR;
+            font-weight: 700;
+            color: $PRIMARY-COLOR;
+        }
     }
 }
