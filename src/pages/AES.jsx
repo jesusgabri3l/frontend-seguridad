@@ -7,6 +7,7 @@ function Aes() {
     const [keyEncr, setKeyEncr] = useState('');
     const [errorEncr, setErrorEncr] = useState(null);
     const [option, setOption] = useState('encrypt');
+
     const handleFileChangeEncr = (e) => {
         setSelectedFileEncr(e.target.files[0]);
     };
@@ -45,9 +46,9 @@ function Aes() {
                 const fileContent = reader.result;
                 try {
                     const decrypted = CryptoJS.AES.decrypt(fileContent, keyEncr).toString(CryptoJS.enc.Utf8);
-                    
+
                     const binaryContent = atob(decrypted);
-                    if(binaryContent.length === 0) {
+                    if (binaryContent.length === 0) {
                         setErrorEncr('Error al desencriptar el archivo. Asegúrate de que la clave sea correcta.');
                         return;
                     }
@@ -57,7 +58,6 @@ function Aes() {
                     for (let i = 0; i < binaryContent.length; i++) {
                         uint8Array[i] = binaryContent.charCodeAt(i);
                     }
-
                     const blob = new Blob([uint8Array], { type: 'application/octet-stream' });
                     const downloadLink = document.createElement('a');
                     downloadLink.href = URL.createObjectURL(blob);
@@ -76,9 +76,11 @@ function Aes() {
     }
     return <div className="aes">
         <div>
-            <h2>{
-                     option === 'encrypt' ? 'Encriptar' : 'Desencriptar'
-                }</h2>
+            <h2>
+                {
+                    option === 'encrypt' ? 'Encriptar' : 'Desencriptar'
+                }
+            </h2>
             <form className="mt-2" onSubmit={handleSubmitEncr}>
                 <input id="file-input" type="file" onChange={handleFileChangeEncr} accept={`${option === 'encrypt' ? '.txt' : '.dat'}`} />
                 <input className="input mt-1" placeholder="Llave" value={keyEncr} name="key" onChange={(e) => setKeyEncr(e.target.value)}></input>
@@ -86,9 +88,8 @@ function Aes() {
                     <option value="encrypt">Encriptar</option>
                     <option value="desencrypt">Desencriptar</option>
                 </select>
-                <button className="mt-3 button button--primary button--primary--outline">{
-                    option === 'encrypt' ? 'Encriptar' : 'Desencriptar'
-                }</button>
+                <button className="mt-3 button button--primary button--primary--outline">
+                    { option === 'encrypt' ? 'Encriptar' : 'Desencriptar' }</button>
             </form>
             {
                 errorEncr && <p className="error mt-2">{errorEncr}</p>

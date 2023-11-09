@@ -1,9 +1,19 @@
 import { useState } from "react";
 import UsersTable from "./UsersTable";
-import AES from "./AES";
 import Aes from "./AES";
+import { userStore } from "../store/user";
+import { deleteCookie } from "../utils/cookies";
+import { useNavigate } from 'react-router-dom'
+
 function HomePage () {
-    const [activeTab, setActiveTab] = useState('tabla')
+    const [activeTab, setActiveTab] = useState('tabla');
+    const navigate = useNavigate();
+    const logoutUserStore = userStore((state) => state.logoutUser);
+    const logout = () => {
+        deleteCookie('jwt');
+        logoutUserStore();
+        navigate('/login')
+    }
     return (
         <section className="page center">
             <div className="tab">
@@ -20,6 +30,9 @@ function HomePage () {
                         activeTab === 'tabla' ? <UsersTable /> : <Aes />
                     }
                 </div>
+            </div>
+            <div className="logout">
+                <button className="button button--primary button--primary--outline" onClick={logout}>Cerrar sesión</button>
             </div>
         </section>
     )

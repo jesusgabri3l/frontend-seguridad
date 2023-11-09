@@ -64,7 +64,6 @@ function UsersTable() {
                 error && <p className="error">{error}</p>
             }
             <button className="button button--primary button--primary--outline mt-2" onClick={() => convertToPdf()} style={{ width: '30%' }} type="submit">Descargar</button>
-
         </div>
 }
 
